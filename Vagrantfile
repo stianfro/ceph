@@ -27,9 +27,15 @@ Vagrant.configure('2') do |config|
   config.vm.network 'private_network', type: 'dhcp'
   config.vm.provision 'shell', inline: prereqs
 
+  config.vm.provider 'virtualbox' do |v|
+    v.memory = 2048
+    v.cpus = 2
+  end
+
   config.vm.define 'mon-a' do |a|
     a.vm.provision 'shell', inline: bootstrap
   end
+
   config.vm.define 'mon-b'
   config.vm.define 'mon-c'
 end
